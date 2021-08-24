@@ -1,7 +1,7 @@
 
-/* Say 메인 이미지와 글 사이즈 조작 (시작) */
+/* Say 硫붿씤 �씠誘몄��� 湲� �궗�씠利� 議곗옉 (�떆�옉) */
 .u-section-1 {
-  background-image: url("images/gdc510ba5f705d13a5d7e6e54baebd240bd6053e0f9c5217265a59c0287db081b034129865f4c95374d8ac97bc55c77fbf7f84011093509ed1e9e638598dc0e28_1280.jpg");
+  background-image: url("../images/gdc510ba5f705d13a5d7e6e54baebd240bd6053e0f9c5217265a59c0287db081b034129865f4c95374d8ac97bc55c77fbf7f84011093509ed1e9e638598dc0e28_1280.jpg");
   background-position: 50% 50%;
 }
 
@@ -20,10 +20,10 @@
   margin: 0 auto 60px 87px;
 }
 
-/* Say 메인 이미지와 글 사이즈 조작 (끝) */
+/* Say 硫붿씤 �씠誘몄��� 湲� �궗�씠利� 議곗옉 (�걹) */
 
 
-/* Say 메인 이미지와 글 미디어 쿼리 (시작) */
+/* Say 硫붿씤 �씠誘몄��� 湲� 誘몃뵒�뼱 荑쇰━ (�떆�옉) */
 
 @media (max-width: 1199px) {
   .u-section-1 .u-sheet-1 {
@@ -66,10 +66,10 @@
 	  min-height: 149px;
 	}
 }
-/* Say 메인 이미지와 글 미디어 쿼리 (끝) */
+/* Say 硫붿씤 �씠誘몄��� 湲� 誘몃뵒�뼱 荑쇰━ (�걹) */
 
 
-/* 화면 메인 이미지 안에 있는 글귀 조작 */
+/* �솕硫� 硫붿씤 �씠誘몄� �븞�뿉 �엳�뒗 湲�洹� 議곗옉 */
 .u-section-1 .u-text-1 {
   font-size: 1.5rem;
   margin-right: 207px;
@@ -83,7 +83,7 @@
   min-height: 898px;
 }
 
-/* title 조작 */
+/* title 議곗옉 */
 .u-section-2 .u-text-1 {
   margin: 60px auto 0;
 }
@@ -112,7 +112,7 @@
   width: 279px;
   right: auto;
   margin-bottom: 0;
-  background-image: url("images/healthy-woman-running-with-blurred-background_23-2147600427.jpg");
+  background-image: url("../images/healthy-woman-running-with-blurred-background_23-2147600427.jpg");
   background-position: 50% 50%;
 }
 
@@ -133,7 +133,7 @@
   margin: 0;
 }
 
-/* 기사의 제목 */
+/* 湲곗궗�쓽 �젣紐� */
 .u-section-2 .u-text-2 {
   margin-top: 20px;
   margin-bottom: 0;
@@ -141,7 +141,7 @@
   text-transform: none;
 }
 
-/*기사의 본문*/
+/*湲곗궗�쓽 蹂몃Ц*/
 /* .u-section-2 .u-text-3 {
   margin-left: 0;
   margin-bottom: 0;
@@ -155,7 +155,7 @@
   padding: 0;
 }
 
-/* 미디어 쿼리 (시작) */
+/* 誘몃뵒�뼱 荑쇰━ (�떆�옉) */
 @media (max-width: 1199px) {
   .u-section-2 .u-sheet-1 {
     min-height: 552px;
@@ -241,4 +241,4 @@
     grid-template-columns: repeat(1, 100%);
   }
 }
-  /* 미디어 쿼리 (끝) */
+  /* 誘몃뵒�뼱 荑쇰━ (�걹) */
