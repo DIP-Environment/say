@@ -1,6 +1,8 @@
 package article.command;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +16,7 @@ import auth.service.User;
 import mvc.command.CommandHandler;
 
 public class WriteArticleHandler implements CommandHandler{
-	private static final String FORM_VIEW = "/WEB-INF/view/newArticleForm.jsp";
+	private static final String FORM_VIEW = "/WEB-INF/view/sayWrite.jsp";
 	private WriteArticleService writeService = new WriteArticleService();
 	
 	@Override
@@ -33,7 +35,9 @@ public class WriteArticleHandler implements CommandHandler{
 		return FORM_VIEW;
 	}
 	
-	private String processSubmit(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+	private String processSubmit(HttpServletRequest request, HttpServletResponse response) throws SQLException, UnsupportedEncodingException, ParseException {
+		// í•œê¸€ì„ ìœ„í•´~
+		request.setCharacterEncoding("UTF-8");
 		Map<String, Boolean> errors = new HashMap<>();
 		request.setAttribute("errors", errors);
 		
@@ -45,10 +49,11 @@ public class WriteArticleHandler implements CommandHandler{
 			return FORM_VIEW;
 		}
 	
-		int newArticleNo = writeService.write(writeReq); //»õ·Î¿î ±Û¹øÈ£¸¦ ¹ŞÀ½.
+		int newArticleNo = writeService.write(writeReq); //ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½Û¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		request.setAttribute("newArticleNo", newArticleNo);
 		
-		return "/WEB-INF/view/newArticleSuccess.jsp";
+		//return "/WEB-INF/view/sayList.jsp";
+		return "articleList.do";
 	}
 	
 	private WriteRequest createWriterRequest(User user, HttpServletRequest request) {

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +17,7 @@ import article.model.Writer;
 import jdbc.JdbcUtil;
 
 public class ArticleDao {
-	public Article insert(Connection conn, Article article) throws SQLException{
+	public Article insert(Connection conn, Article article) throws SQLException, ParseException{
 		PreparedStatement pstmt = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -24,18 +26,18 @@ public class ArticleDao {
 			pstmt = conn.prepareStatement("insert into say_article "
 					+ "(writer_id, writer_name, title, regdate, moddate) "
 					+ "values(?,?,?,?,?)");
-			pstmt.setString(1, article.getWriter().getId()); //ÀÛ¼ºÀÚ ¾ÆÀÌµð
-			pstmt.setString(2, article.getWriter().getName()); //ÀÛ¼ºÀÚ ÀÌ¸§
-			pstmt.setString(3, article.getTitle()); //±ÛÁ¦¸ñ
+			pstmt.setString(1, article.getWriter().getId()); //ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
+			pstmt.setString(2, article.getWriter().getName()); //ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+			pstmt.setString(3, article.getTitle()); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			pstmt.setTimestamp(4, toTimestamp(article.getRegDate()));
 			pstmt.setTimestamp(5, toTimestamp(article.getModifiedDate()));
 			int insertedCount = pstmt.executeUpdate();
 			
 			if(insertedCount > 0) {
 				stmt = conn.createStatement();
-				rs = stmt.executeQuery("select last_insert_id() from say_article"); //¸¶Áö¸· ±Û¹øÈ£¸¦ rs¿¡ ´ã´Â´Ù.
+				rs = stmt.executeQuery("select last_insert_id() from say_article"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¹ï¿½È£ï¿½ï¿½ rsï¿½ï¿½ ï¿½ï¿½Â´ï¿½.
 				if(rs.next()) {
-					Integer newNum = rs.getInt(1); //±Û¹øÈ£¸¦ newNum¿¡ ´ã´Â´Ù.
+					Integer newNum = rs.getInt(1); //ï¿½Û¹ï¿½È£ï¿½ï¿½ newNumï¿½ï¿½ ï¿½ï¿½Â´ï¿½.
 					return new Article(newNum,
 							article.getWriter(),
 							article.getTitle(),
@@ -51,7 +53,7 @@ public class ArticleDao {
 		}
 	}
 
-	private Timestamp toTimestamp(Date date) {
+	private Timestamp toTimestamp(Date date) throws ParseException { 
 		return new Timestamp(date.getTime());
 	}
 	
@@ -71,7 +73,7 @@ public class ArticleDao {
 		}
 	}
 	
-	public List<Article> select(Connection conn, int startRow, int size) throws SQLException{
+	public List<Article> select(Connection conn, int startRow, int size) throws SQLException, ParseException{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -93,7 +95,7 @@ public class ArticleDao {
 		}
 	}
 
-	private Article convertArticle(ResultSet rs) throws SQLException {
+	private Article convertArticle(ResultSet rs) throws SQLException, ParseException {
 		return new Article(rs.getInt("article_no"),
 				new Writer(
 						rs.getString("writer_id"),
@@ -107,7 +109,7 @@ public class ArticleDao {
 		return new Date(timestamp.getTime());
 	}
 	
-	public Article selectById(Connection conn, int no) throws SQLException{
+	public Article selectById(Connection conn, int no) throws SQLException, ParseException{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {

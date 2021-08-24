@@ -2,6 +2,7 @@ package article.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import article.dao.ArticleContentDao;
 import article.dao.ArticleDao;
@@ -13,7 +14,7 @@ public class ModifyArticleService {
 	private ArticleDao articleDao = new ArticleDao();
 	private ArticleContentDao contentDao = new ArticleContentDao();
 	
-	public void modify(ModifyRequest modReq) throws SQLException {
+	public void modify(ModifyRequest modReq) throws SQLException, ParseException {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();

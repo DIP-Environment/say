@@ -2,6 +2,7 @@ package article.command;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ import auth.service.User;
 import mvc.command.CommandHandler;
 
 public class ModifyArticleHandler implements CommandHandler{
-	private static final String FORM_VIEW = "/WEB-INF/view/modifyForm.jsp";
+	private static final String FORM_VIEW = "/WEB-INF/view/sayWriteModify.jsp";
 	
 	private ReadArticleService readService = new ReadArticleService();
 	private ModifyArticleService modifyService = new ModifyArticleService();
@@ -35,7 +36,7 @@ public class ModifyArticleHandler implements CommandHandler{
 		return null;
 	}
 	
-	private String processForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+	private String processForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ParseException {
 		try {
 			String noVal = request.getParameter("no");
 			int no = Integer.parseInt(noVal);
@@ -60,7 +61,9 @@ public class ModifyArticleHandler implements CommandHandler{
 		return authUser.getId().equals(writerId);
 	}
 
-	private String processSubmit(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+	private String processSubmit(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ParseException {
+		// ÌïúÍ∏ÄÏùÑ ÏúÑÌï¥~
+		request.setCharacterEncoding("UTF-8");
 		User authUser = (User) request.getSession().getAttribute("authUser");
 		String noVal = request.getParameter("no");
 		int no = Integer.parseInt(noVal);
@@ -76,7 +79,8 @@ public class ModifyArticleHandler implements CommandHandler{
 		}
 		try {
 			modifyService.modify(modReq);
-			return "/WEB-INF/view/modifySuccess.jsp"; //request.setAttribute("errors", errors) ∞°¡ˆ∞Ì ∞• ºˆ ¿÷¿Ω.
+			System.out.println("ÏàòÏ†ï ÏÑ±Í≥µ!");
+			return "articleRead.do"; //request.setAttribute("errors", errors) ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ ÔøΩÔøΩ ÔøΩÔøΩ ÔøΩÔøΩÔøΩÔøΩ.
 		}catch (ArticleNotFoundException ex) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;

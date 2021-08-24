@@ -12,6 +12,8 @@ public class ListArticleHandler implements CommandHandler {
 	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 한글을 위해~
+		request.setCharacterEncoding("UTF-8");
 		String pageNoVal = request.getParameter("pageNo");
 		int pageNo = 1;
 		if(pageNoVal != null) {
@@ -19,7 +21,7 @@ public class ListArticleHandler implements CommandHandler {
 		}
 		ArticlePage articlePage = listService.getArticlePage(pageNo);
 		request.setAttribute("articlePage", articlePage);
-		return "/WEB-INF/view/listArticle.jsp";
+		return "/WEB-INF/view/sayList.jsp";
 	}
 	
 }

@@ -3,7 +3,7 @@ memberid varchar(50) primary key,
 name varchar(50) not null,
 password varchar(10) not null,
 regdate datetime not null
-);
+)DEFAULT CHARSET=utf8;
 
 select * from member1;
 

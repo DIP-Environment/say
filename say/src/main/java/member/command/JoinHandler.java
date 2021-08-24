@@ -1,5 +1,6 @@
 package member.command;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +34,9 @@ public class JoinHandler implements CommandHandler{
 		return FORM_VIEW;
 	}
 	
-	private String processSubmit(HttpServletRequest request, HttpServletResponse response) {
+	private String processSubmit(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		// 한글을 위해~
+		request.setCharacterEncoding("UTF-8");
 		JoinRequest joinReq = new JoinRequest();
 		joinReq.setId(request.getParameter("id"));
 		joinReq.setName(request.getParameter("name"));
@@ -52,7 +55,7 @@ public class JoinHandler implements CommandHandler{
 			joinService.join(joinReq);
 			return "/WEB-INF/view/joinSuccess.jsp";
 		}catch (DuplicateIdException | SQLException ex) {
-			//System.out.println("DuplicateIdException ȣ��");
+			//System.out.println("DuplicateIdException ȣ��");
 			errors.put("duplicateId", Boolean.TRUE);
 			return FORM_VIEW;
 		}

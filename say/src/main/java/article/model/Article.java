@@ -1,5 +1,7 @@
 package article.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Article {
@@ -9,7 +11,7 @@ public class Article {
 	private Date regDate;
 	private Date modifiedDate;
 	
-	public Article(Integer number, Writer writer, String title, Date regDate, Date modifiedDate) {
+	public Article(Integer number, Writer writer, String title, Date regDate, Date modifiedDate) throws ParseException {
 		this.number = number;
 		this.writer = writer;
 		this.title = title;
