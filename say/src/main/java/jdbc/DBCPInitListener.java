@@ -5,10 +5,8 @@ import java.io.StringReader;
 import java.sql.DriverManager;
 import java.util.Properties;
 
-import javax.management.RuntimeErrorException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 
 import org.apache.commons.dbcp2.ConnectionFactory;
 import org.apache.commons.dbcp2.DriverManagerConnectionFactory;
@@ -20,7 +18,7 @@ import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
 public class DBCPInitListener implements ServletContextListener {
 
-    //ÃÊ±âÈ­
+    //ï¿½Ê±ï¿½È­
     public void contextInitialized(ServletContextEvent arg0)  { 
         String poolConfig  = arg0.getServletContext().getInitParameter("poolConfig");
         System.out.println("poolConfig: " + poolConfig);
@@ -38,7 +36,7 @@ public class DBCPInitListener implements ServletContextListener {
     	String driverClass = prop.getProperty("jdbcdriver");
     	try {
     		Class.forName(driverClass);
-    		System.out.println("driverClass ½ÇÇà");
+    		System.out.println("driverClass ï¿½ï¿½ï¿½ï¿½");
     	}catch (ClassNotFoundException ex) {
 			throw new RuntimeException("fail to load JDBC Driver", ex);
 		}
@@ -79,7 +77,7 @@ public class DBCPInitListener implements ServletContextListener {
 					(PoolingDriver) DriverManager.getDriver("jdbc:apache:commons:dbcp:");
 			String poolName = prop.getProperty("poolName");
 			driver.registerPool(poolName, connectionPool);
-			System.out.println("Ç®¸µµå¶óÀÌ¹ö");
+			System.out.println("Ç®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½");
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -91,7 +89,7 @@ public class DBCPInitListener implements ServletContextListener {
 		return Integer.parseInt(value);
 	}
 
-	//¼Ò¸ê
+	//ï¿½Ò¸ï¿½
     public void contextDestroyed(ServletContextEvent arg0)  { 
         
     }
