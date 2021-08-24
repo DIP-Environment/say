@@ -2,6 +2,7 @@ package article.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Date;
 
 import article.dao.ArticleContentDao;
@@ -15,7 +16,7 @@ public class WriteArticleService {
 	private ArticleDao articleDao = new ArticleDao();
 	private ArticleContentDao contentDao = new ArticleContentDao();
 	
-	public Integer write(WriteRequest req) throws SQLException {
+	public Integer write(WriteRequest req) throws SQLException, ParseException {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
@@ -29,7 +30,7 @@ public class WriteArticleService {
 			ArticleContent content = new ArticleContent(
 					savedArticle.getNumber(),
 					req.getContent());
-			ArticleContent savedContent = contentDao.insert(conn, content); //±Û¹øÈ£¸¦ °¡Áö°í¿È. db¿¡¼­
+			ArticleContent savedContent = contentDao.insert(conn, content); //ï¿½Û¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. dbï¿½ï¿½ï¿½ï¿½
 			if(savedArticle == null) {
 				throw new RuntimeException("fail to insert article");
 			}
@@ -47,7 +48,7 @@ public class WriteArticleService {
 		}
 	}
 
-	private Article toArticle(WriteRequest req) {
+	private Article toArticle(WriteRequest req) throws ParseException {
 		Date now = new Date();
 		return new Article(null, req.getWirer(), req.getTitle(), now, now);
 	}

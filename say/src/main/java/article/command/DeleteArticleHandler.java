@@ -17,7 +17,7 @@ import auth.service.User;
 import mvc.command.CommandHandler;
 
 public class DeleteArticleHandler implements CommandHandler {
-	private static final String FORM_VIEW = "/WEB-INF/view/deleteSuccess.jsp";
+	private static final String FORM_VIEW = "articleList.do";
 
 	private DeleteArticleService deleteService = new DeleteArticleService();
 	
@@ -28,7 +28,7 @@ public class DeleteArticleHandler implements CommandHandler {
 		int no = Integer.parseInt(noVal);
 
 		DeleteRequest delReq = new DeleteRequest(authUser.getId(), no);
-		request.setAttribute("delReq", delReq); //µî·ÏÇØ¾ßÇÔ.
+		request.setAttribute("delReq", delReq); //ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½.
 
 		try {
 			deleteService.delete(delReq);

@@ -20,7 +20,7 @@ public class ReadArticleHandler implements CommandHandler {
 		try {
 			ArticleData articleData = readService.getArticle(articleNum, true);
 			request.setAttribute("articleData", articleData);
-			return "/WEB-INF/view/readArticle.jsp";
+			return "/WEB-INF/view/sayDetail.jsp";
 		}catch (ArticleNotFoundException | ArticleContentNotFoundException ex) {
 			request.getServletContext().log("no article", ex);
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);

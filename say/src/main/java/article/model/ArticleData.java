@@ -1,8 +1,11 @@
 package article.model;
 
+import java.util.Date;
+
 public class ArticleData {
 	private Article article;
 	private ArticleContent content;
+	public Date today = new Date();
 	
 	public ArticleData(Article article, ArticleContent content) {
 		super();
@@ -17,4 +20,6 @@ public class ArticleData {
 	public String getContent() {
 		return content.getContent();
 	}
+	
+	
 }
