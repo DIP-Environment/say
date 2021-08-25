@@ -112,7 +112,9 @@
   width: 279px;
   right: auto;
   margin-bottom: 0;
-  background-image: url("../images/healthy-woman-running-with-blurred-background_23-2147600427.jpg");
+  
+  /* background-image: url("../images/healthy-woman-running-with-blurred-background_23-2147600427.jpg");  */
+  
   background-position: 50% 50%;
 }
 

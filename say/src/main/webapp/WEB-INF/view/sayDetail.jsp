@@ -71,6 +71,7 @@
         <h4 class="u-text u-text-default u-text-2">Home &gt; Say &gt; Detail</h4>
       </div>
     </section>
+    <br><br><br>
     <section class="u-clearfix u-section-2" id="sec-aec7">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="fr-view u-align-center u-clearfix u-rich-text u-text u-text-1">
@@ -83,18 +84,23 @@
           <p style="text-align: center;">
             <span style="line-height: 2.0;"><u:pre value="${articleData.content }"/></span>
           </p>
+          <br><br><br>
         </div>
   		<!-- date -->
-        <p class="u-align-right u-text u-text-2">${articleData.article.regDate }</p>
+        <p class="u-align-right u-text u-text-2">${articleData.article.regDate }</p><br><br><br>
 		<c:if test="${authUser.id == articleData.article.writer.id }">
-			<a href="articleModify.do?no=${articleData.article.number }" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">수정</a>
-			<a href="articleDelete.do?no=${articleData.article.number }" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">삭제</a>
+		<div align = "right">
+			<a  href="articleModify.do?no=${articleData.article.number }" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">수정</a>
+			<a href="articleDelete.do?no=${articleData.article.number }" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">삭제</a>
+			
 		</c:if>
 		<c:set var="pageNo" value="${empty param.pageNo ? '1': param.pageNo }"/>
 		<a href="articleList.do?pageNo=${pageNo }" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">목록</a>
+		</div>
         <!-- <a href="https://nicepage.com/c/architecture-building-website-templates" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">삭제</a>
         <a href="https://nicepage.com/c/architecture-building-website-templates" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">수정</a> -->
       </div>
+      <br><br><br><br><br><br>
     </section>
     <section class="u-align-center u-border-2 u-border-palette-3-base u-clearfix u-palette-3-light-3 u-section-3" id="sec-13f6">
       <div class="u-clearfix u-sheet u-sheet-1">
