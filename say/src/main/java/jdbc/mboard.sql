@@ -27,7 +27,7 @@ select * from say_article_content
 
 select last_insert_id() from say_article;
 
-//limit ���۹�ȣ(0����), size
+//limit ���۹�ȣ(0����), size
 select * from article order by article_no desc limit 0,2;
 
 select * from article_content where article_no = 7;
@@ -35,10 +35,18 @@ select * from article_content where article_no = 7;
 select now();
 
 
+// 댓글기능구현테이블
+// 작성자 이름, 내용, 날짜
+create table ajax_comment(
+	num int auto_increment primary key,
+	writer varchar(50),
+	content varchar(500),
+	write_date datetime not null
+)
 
-
-
-
+INSERT INTO ajax_comment(writer,content,write_date) VALUES("김태우","안녕하세요",now())
+UPDATE ajax_comment set writer="김태우", content="안녕하세세세요?" where num=1;
+DELETE FROM ajax_comment where num=1;
 
 
 
