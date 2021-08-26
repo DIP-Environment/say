@@ -73,23 +73,41 @@
   margin: 0;
 }
 
-.u-section-2 .u-btn-1 {
+
+.u-section-2 .u-btn-0 {
+  display: inline;
   border-style: none;
   font-weight: 700;
   text-transform: uppercase;
   font-size: 0.875rem;
   letter-spacing: 1px;
-  margin: 63px 0 0 auto;
+  margin: auto;
+  text-align:right;
+}
+
+.u-section-2 .u-btn-1 {
+  display: inline;
+  border-style: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 1px;
+  margin: auto;
+  text-align:right;
 }
 
 .u-section-2 .u-btn-2 {
+  display: inline;
   border-style: none;
   font-weight: 700;
   text-transform: uppercase;
   font-size: 0.875rem;
   letter-spacing: 1px;
-  margin: -42px 108px 60px auto;
+  margin: auto;
+  text-align:right;
 }
+
+
 
 @media (max-width: 1199px) {
   .u-section-2 .u-btn-2 {

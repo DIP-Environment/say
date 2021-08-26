@@ -78,10 +78,12 @@
           <div class="u-repeater u-repeater-1"><!--blog_post-->
           
           	<!--기사 한 개 시작-->
-          	<c:forEach var="article" items="${articlePage.content }">
+          	<c:forEach var="article"  varStatus="status" items="${articlePage.content }">
             <div class="u-blog-post u-container-style u-repeater-item u-white u-repeater-item-1">                   
               <div class="u-container-layout u-similar-container u-valign-middle-xl u-container-layout-1"><!--blog_post_image-->                
-                <div alt="" class="u-blog-control u-expanded-height-lg u-expanded-height-xl u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-image u-image-circle u-image-1"><!--/blog_post_image--></div>
+                <div alt="" class="u-blog-control u-expanded-height-lg u-expanded-height-xl u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-image u-image-circle u-image-1"><!--/blog_post_image-->
+                	<img class="u-blog-control u-expanded-height-lg u-expanded-height-xl u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-image u-image-circle u-image-1" id="title" src="images/title${status.index}.jpg">
+                </div>
              
                 <div class="u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-video-cover u-group-1">
                   
