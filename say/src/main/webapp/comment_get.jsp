@@ -10,7 +10,7 @@
 	}
 
 	int num=Integer.parseInt(request.getParameter("num"));
-	
+	System.out.print("modifyNum => " + num);
 	AjaxCommentDTO ajaxComment=AjaxCommentDAO.getDAO().selectAjaxComment(num);
 %>
 <result>

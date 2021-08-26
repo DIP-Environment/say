@@ -5,6 +5,7 @@ public class AjaxCommentDTO {
 	private String writer;
 	private String Content;
 	private String writeDate;
+	private int bno; // 게시글의 번호
 	
 	public AjaxCommentDTO() {
 		// TODO Auto-generated constructor stub
@@ -40,6 +41,14 @@ public class AjaxCommentDTO {
 
 	public void setWriteDate(String writeDate) {
 		this.writeDate = writeDate;
+	}
+
+	public int getBno() {
+		return bno;
+	}
+
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
 	
 	

@@ -11,13 +11,20 @@
     <meta name="page_type" content="np-template-header-footer-from-plugin">
     <title>say_write</title>
     <link rel="stylesheet" href="css/nicepage.css" media="screen">
-<link rel="stylesheet" href="css/say_write.css" media="screen">
+	<link rel="stylesheet" href="css/say_write.css" media="screen">
+    <link rel="stylesheet" href="css/contents.css" type="text/css">
+    
     <script class="u-script" type="text/javascript" src="js/jquery-1.9.1.min.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 3.23.8, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
-    
-    
+    <script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script>
+    	window.onload = function(){
+       ck = CKEDITOR.replace("content");
+    };
+    </script>
+    <!-- include libraries(jQuery, bootstrap) -->
     
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
@@ -77,7 +84,7 @@
           <form action="articleWrite.do" method="post">
             <input type="hidden" id="siteId" name="siteId" value="618634">
             <input type="hidden" id="pageId" name="pageId" value="618641">
-            <div class="u-form-group u-form-group-1">
+            <div class="u-form-group u-form-group-1" id="content">
             <!-- 제목 텍스트 -->
               <label for="text-50d4" class="u-form-control-hidden u-label"></label>
               <input type="text" placeholder="" id="text-50d4" name="title" value="${param.title }"  class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
@@ -86,7 +93,15 @@
             <div class="u-form-group u-form-message u-form-textarea u-form-group-2">
             <!-- 내용 텍스트 -->
               <label for="textarea-5f9c" class="u-form-control-hidden u-label"></label>
-              <textarea rows="20" cols="50" id="textarea-5f9c" name="content" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">${param.content }</textarea>
+               <script type="text/javascript"> 
+		              var ckeditor_config = {
+		                resize_enaleb : false,
+		                enterMode : CKEDITOR.ENTER_BR,
+		                shiftEnterMode : CKEDITOR.ENTER_P,
+		                filebrowserUploadUrl : "upload"
+		              };
+		              CKEDITOR.replace("content", ckeditor_config);
+	             </script>
             </div>
             <div class="u-align-center u-form-group u-form-submit">
             <!-- 버튼 -->
