@@ -5,8 +5,11 @@
 <%@page import="java.util.List"%>
 <%-- AJAX_COMMENT테이블에 저장된 모든 댓글을 검색하여 XML텍스트데이터로 응답하는 JSP문서 >> 값저장은 JSON텍스트로 --%>
 <%
+	int bno=Integer.parseInt(request.getParameter("bno"));
+	System.out.println("bno=>" + bno);
+
 	// 전체검색
-	List<AjaxCommentDTO> ajaxCommentList=AjaxCommentDAO.getDAO().selectAjaxCommentList();
+	List<AjaxCommentDTO> ajaxCommentList=AjaxCommentDAO.getDAO().selectAjaxCommentList(bno);
 %>
 
 <result>

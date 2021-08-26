@@ -7,7 +7,7 @@
 <%@page import="java.util.List"%>
 <%
 	//전체검색
-	List<AjaxCommentDTO> ajaxCommentList=AjaxCommentDAO.getDAO().selectAjaxCommentList();
+	//List<AjaxCommentDTO> ajaxCommentList=AjaxCommentDAO.getDAO().selectAjaxCommentList();
 %>
 <!DOCTYPE html>
 <html style="font-size: 16px;">
@@ -99,7 +99,6 @@
 		<div align = "right">
 			<a  href="articleModify.do?no=${articleData.article.number }" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">수정</a>
 			<a href="articleDelete.do?no=${articleData.article.number }" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">삭제</a>
-			
 		</c:if>
 		<c:set var="pageNo" value="${empty param.pageNo ? '1': param.pageNo }"/>
 		<a href="articleList.do?pageNo=${pageNo }" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">목록</a>
@@ -169,6 +168,38 @@
     <!-- 댓글 read -->
     <%-- 댓글 목록 출력 영역 --%>
 	<div id="comment_list"></div>
+	<!-- 게시판 번호 -->
+	<input type="hidden" name="bno" value="${articleData.article.number}">
+	<!-- 로그인 이름 -->
+	<input type="hidden" name="writer" value="${authUser.id}">\
+	<%-- 댓글 변경 영역 --%>
+	<div id="comment_modify" style="margin-left: 160px; display: none;">
+		<table class="comment_table">
+			<tr>
+				<td class="title">작성자</td>
+				<td class="input"><input type="text" id="modify_writer"></td>
+			</tr>
+			<tr>
+				<td class="title">댓글내용</td>
+				<td class="input"><textarea rows="3" cols="50" id="modify_content"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2" class="btn"><button type="button" id="modify_btn">댓글수정</button>&nbsp;
+				<button type="button" id="modify_cancel_btn">수정취소</button></td>
+			</tr>
+		</table>
+		<div id="modify_message">&nbsp;</div>
+	</div>
+
+	<%-- 댓글 삭제 영역 --%>
+	<div id="comment_remove" style="margin-left: 160px; display: none;">
+		<div id="remove_message">
+			<b>정말로 삭제하꼬니?</b>
+			<button type="button" id="remove_btn">댓글삭제</button>
+			<button type="button" id="remove_cancel_btn">삭제취소</button>
+		</div>
+	</div>
+	
 	
     <!-- <section class="u-clearfix u-palette-3-light-3 u-section-4" id="sec-9954">
       <div class="u-clearfix u-sheet u-sheet-1">
@@ -210,6 +241,7 @@ mollit anim id est laborum.
 		$.ajax({
 			type: "GET",
 			url: "comment_list.jsp",
+			data: "bno="+"${articleData.article.number }",
 			dataType: "xml",
 			success: function(xmlDoc) {
 				// 코드확인
@@ -225,7 +257,7 @@ mollit anim id est laborum.
 					$(commentArray).each(function() {
 						// 수정을 위해 각각의 div에 고유값인 id를 부여 >> 이때 num활용
 						// 삭제를 위해 num부여 >> 이때도 num활용
-						$("#comment_list").append("<section class='u-clearfix u-palette-3-light-3 u-section-4' id='sec-9954'><div id='comment_"+this.num+"' class='u-clearfix u-sheet u-sheet-1' num='"+this.num+"'><br><h3 class='u-text u-text-1'>"+this.writer+"</h3><br><p class='u-text u-text-2'>"+this.writeDate+"</p><br><p class='u-text u-text-3'>"+this.content.replace(/\n/g, "<br>")+"</p><br><button class='u-btn u-btn-submit u-button-style' id='replyDeleteBtn' type='button' onclick='removeComment("+this.num+");'>삭제</button>&nbsp;<button class='u-btn u-btn-submit u-button-style' id='replyModifyBtn' type='button' onclick='modifyComment("+this.num+");'>수정</button></div></div></section>");
+						$("#comment_list").append("<section class='u-clearfix u-palette-3-light-3 u-section-4' id='sec-9954'><div id='comment_"+this.num+"' class='u-clearfix u-sheet u-sheet-1' num='"+this.num+"'><br><h3 class='u-text u-text-1'>"+this.writer+"</h3><br><p class='u-text u-text-2'>"+this.writeDate+"</p><br><p class='u-text u-text-3'>"+this.content.replace(/\n/g, "<br>")+"</p><br><button class='u-btn u-btn-submit u-button-style' id='replyDeleteBtn' type='button' onclick='removeComment("+this.num+")'>삭제</button>&nbsp;<button class='u-btn u-btn-submit u-button-style' id='replyModifyBtn' type='button' onclick='modifyComment("+this.num+")'>수정</button></div></div></section>");
 						});
 				} else { 
 					var message=$(xmlDoc).find("message").text();
@@ -263,7 +295,7 @@ mollit anim id est laborum.
 		$.ajax({
 			type: "POST",
 			url: "comment_add.jsp",
-			data: "writer="+writer+"&content="+content,     // QueryString형태로 전달
+			data: "writer="+"${authUser.id}"+"&content="+content+"&bno="+"${articleData.article.number }",     // QueryString형태로 전달
 			dataType: "xml",
 			success: function(xmlDoc) {
 				var code=$(xmlDoc).find("code").text();

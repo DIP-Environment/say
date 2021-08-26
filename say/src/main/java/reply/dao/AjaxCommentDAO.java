@@ -34,10 +34,11 @@ public class AjaxCommentDAO {
 		
 		try {
 			conn = ConnectionProvider.getConnection();
-			String sql = "INSERT INTO ajax_comment(writer,content,write_date) VALUES(?,?,now())";
+			String sql = "INSERT INTO ajax_comment(writer,content,write_date,bno) VALUES(?,?,now(),?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, ajaxComment.getWriter());
 			pstmt.setString(2, ajaxComment.getContent());
+			pstmt.setInt(3, ajaxComment.getBno());
 			rows = pstmt.executeUpdate();
 		}catch (SQLException e) {
 			System.out.println("[ERROR] insertAjaxComment() 메소드의 SQL 오류 >>" + e.getMessage());
@@ -112,6 +113,7 @@ public class AjaxCommentDAO {
 				ajaxComment.setWriter(rs.getString("writer"));
 				ajaxComment.setContent(rs.getString("content"));
 				ajaxComment.setWriteDate(rs.getString("write_date"));
+				ajaxComment.setBno(rs.getInt("bno"));
 			}
 		}catch (SQLException e) {
 			System.out.println("[ERROR] selectAjaxComment() 메소드의 SQL 오류 >>" + e.getMessage());
@@ -123,7 +125,9 @@ public class AjaxCommentDAO {
 		return ajaxComment;
 	}
 	
-	public List<AjaxCommentDTO> selectAjaxCommentList() throws SQLException{
+	//전체!
+	public List<AjaxCommentDTO> selectAjaxCommentList(int num) throws SQLException{
+		System.out.println("List<AjaxCommentDTO> bno =>" + num);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -131,8 +135,9 @@ public class AjaxCommentDAO {
 		
 		try {
 			conn = ConnectionProvider.getConnection();
-			String sql = "SELECT * FROM AJAX_COMMENT ORDER BY NUM DESC";
+			String sql = "SELECT * FROM AJAX_COMMENT WHERE bno=? ORDER BY NUM DESC";
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
 			
 			rs = pstmt.executeQuery();
 			
@@ -142,6 +147,7 @@ public class AjaxCommentDAO {
 				ajaxComment.setWriter(rs.getString("writer"));
 				ajaxComment.setContent(rs.getString("content"));
 				ajaxComment.setWriteDate(rs.getString("write_date"));
+				ajaxComment.setBno(rs.getInt("bno"));
 				ajaxCommentList.add(ajaxComment);
 			}
 		}catch (SQLException e) {

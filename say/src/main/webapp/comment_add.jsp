@@ -14,10 +14,13 @@
 	
 	String writer=request.getParameter("writer");
 	String content=request.getParameter("content");
+	int bno=Integer.parseInt(request.getParameter("bno"));
+	System.out.println("bno=>" + bno);
 	
 	AjaxCommentDTO ajaxComment=new AjaxCommentDTO();
 	ajaxComment.setWriter(writer);
 	ajaxComment.setContent(content);
+	ajaxComment.setBno(bno);
 	
 	// 저장을 실패할 경우를 대비하여 아래같이 rows받아서xml문서에 활용
 	int rows=AjaxCommentDAO.getDAO().insertAjaxComment(ajaxComment);
