@@ -5,19 +5,19 @@ import java.util.Map;
 import article.model.Writer;
 
 public class WriteRequest {
-	private Writer wirer;
+	private Writer writer;
 	private String title;
 	private String content;
 	
-	public WriteRequest(Writer wirer, String title, String content) {
+	public WriteRequest(Writer writer, String title, String content) {
 		super();
-		this.wirer = wirer;
+		this.writer = writer;
 		this.title = title;
 		this.content = content;
 	}
 
-	public Writer getWirer() {
-		return wirer;
+	public Writer getWriter() {
+		return writer;
 	}
 
 	public String getTitle() {

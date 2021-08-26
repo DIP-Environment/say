@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import article.dao.ArticleDao;
+import article.model.Article;
+import auth.service.User;
 import jdbc.connection.ConnectionProvider;
 
 public class AjaxCommentDAO {
@@ -35,7 +38,6 @@ public class AjaxCommentDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, ajaxComment.getWriter());
 			pstmt.setString(2, ajaxComment.getContent());
-			
 			rows = pstmt.executeUpdate();
 		}catch (SQLException e) {
 			System.out.println("[ERROR] insertAjaxComment() 메소드의 SQL 오류 >>" + e.getMessage());

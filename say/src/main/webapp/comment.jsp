@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%-- AJAX_COMMENT 테이블을 이용하여 댓글에 대한 저장/변경/삭제 기능을 제공하고 댓글목록을 검색하려 출력하는 JSP문서 --%>
 <%-- => 즉, 하나의 페이지로 모든 기능에대해 비동기식으로 요청 처리 --%>
+<%
+	String userid = (String)session.getAttribute("authUser");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +83,7 @@ h1 {
 		<table class="comment_table">
 			<tr>
 				<td class="title">작성자</td>
-				<td class="input"><input type="text" id="writer"></td>
+				<td class="input"><input type="text" id="writer" value="<%=userid %>"></td>
 			</tr>
 			<tr>
 				<td class="title">댓글내용</td>
@@ -148,7 +151,7 @@ h1 {
 					$(commentArray).each(function() {
 						// 수정을 위해 각각의 div에 고유값인 id를 부여 >> 이때 num활용
 						// 삭제를 위해 num부여 >> 이때도 num활용
-						$("#comment_list").append("<div id='comment_"+this.num+"' class='comment' num='"+this.num+"'><b>["+this.writer+"]</b><br>"+this.content.replace(/\n/g, "<br>")+"<br>("+this.writeDate+")<br><button type='button' onclick='modifyComment("+this.num+");'>수정</button>&nbsp;<button type='button' onclick='removeComment("+this.num+");'>삭제</button></div>");
+						$("#comment_list").append("<div id='comment_"+this.num+"' class='comment' num='"+this.num+"'><b>["+this.writer+"]</b><br>"+this.content.replace(/\n/g, "<br>")+"<br>("+this.writeDate+")<br><button class='btn' type='button' onclick='modifyComment("+this.num+");'>수정</button>&nbsp;<button class='btn' type='button' onclick='removeComment("+this.num+");'>삭제</button></div>");
 					});
 				} else { 
 					var message=$(xmlDoc).find("message").text();

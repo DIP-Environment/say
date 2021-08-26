@@ -2,6 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
+<%@page import="reply.utility.Utility"%>
+<%@page import="reply.dao.*"%>
+<%@page import="java.util.List"%>
+<%
+	//전체검색
+	List<AjaxCommentDTO> ajaxCommentList=AjaxCommentDAO.getDAO().selectAjaxCommentList();
+%>
 <!DOCTYPE html>
 <html style="font-size: 16px;">
   <head>
@@ -12,12 +19,12 @@
     <meta name="page_type" content="np-template-header-footer-from-plugin">
     <title>say_detail</title>
     <link rel="stylesheet" href="css/nicepage.css" media="screen">
-<link rel="stylesheet" href="css/say_detail.css" media="screen">
+	<link rel="stylesheet" href="css/say_detail.css" media="screen">
     <script class="u-script" type="text/javascript" src="js/jquery-1.9.1.min.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 3.23.8, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     
     
     
@@ -96,21 +103,27 @@
         <a href="https://nicepage.com/c/architecture-building-website-templates" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">수정</a> -->
       </div>
     </section>
-    <section class="u-align-center u-border-2 u-border-palette-3-base u-clearfix u-palette-3-light-3 u-section-3" id="sec-13f6">
+   <!-- 댓글 write -->
+   <section class="u-align-center u-border-2 u-border-palette-3-base u-clearfix u-palette-3-light-3 u-section-3" id="sec-13f6">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <h2 class="u-subtitle u-text u-text-default u-text-1">Comm<span style="font-weight: 700;"></span>ent
+      	<!-- title -->
+        <h2 class="u-subtitle u-text u-text-default u-text-1">Comment<span style="font-weight: 700;"></span>
         </h2>
         <div class="u-form u-form-1">
+        <!-- //form 시작 -->
           <form action="#" method="POST" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
             <input type="hidden" id="siteId" name="siteId" value="618634">
             <input type="hidden" id="pageId" name="pageId" value="623010">
             <div class="u-form-group u-form-message u-form-group-1">
+           	<!-- 입력란 -->
               <label for="message-6797" class="u-form-control-hidden u-label">Address</label>
-              <textarea placeholder="Enter your message" rows="4" cols="50" id="message-6797" name="message" class="u-border-1 u-border-grey-30 u-input u-input-rectangle" required=""></textarea>
+              <textarea placeholder="Enter your message" rows="4" cols="50" id="content" name="message" class="u-border-1 u-border-grey-30 u-input u-input-rectangle" required=""></textarea>
             </div>
             <div class="u-align-right u-form-group u-form-submit u-form-group-2">
-              <a href="#" class="u-btn u-btn-submit u-button-style">등록</a>
-              <input type="submit" value="submit" class="u-form-control-hidden">
+            <!-- 등록버튼 -->
+              <!-- <a href="#" class="u-btn u-btn-submit u-button-style">등록</a>
+              <input type="submit" value="submit" class="u-form-control-hidden"> -->
+              <button type="button" id="add_btn" class="u-btn u-btn-submit u-button-style">댓글등록</button>
             </div>
             <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
             <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
@@ -119,7 +132,39 @@
         </div>
       </div>
     </section>
-    <section class="u-clearfix u-palette-3-light-3 u-section-4" id="sec-9954">
+    <!-- <section class="u-align-center u-border-2 u-border-palette-3-base u-clearfix u-palette-3-light-3 u-section-3" id="sec-13f6">
+      <div class="u-clearfix u-sheet u-sheet-1">
+      	title
+        <h2 class="u-subtitle u-text u-text-default u-text-1">Comment<span style="font-weight: 700;"></span>
+        </h2>
+        <div class="u-form u-form-1">
+        //form 시작
+          <form action="#" method="POST" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
+            <input type="hidden" id="siteId" name="siteId" value="618634">
+            <input type="hidden" id="pageId" name="pageId" value="623010">
+            <div class="u-form-group u-form-message u-form-group-1">
+           	입력란
+              <label for="message-6797" class="u-form-control-hidden u-label">Address</label>
+              <textarea placeholder="Enter your message" rows="4" cols="50" id="message-6797" name="message" class="u-border-1 u-border-grey-30 u-input u-input-rectangle" required=""></textarea>
+            </div>
+            <div class="u-align-right u-form-group u-form-submit u-form-group-2">
+            등록버튼
+              <a href="#" class="u-btn u-btn-submit u-button-style">등록</a>
+              <input type="submit" value="submit" class="u-form-control-hidden">
+              <button type="button" id="add_btn" class="u-btn u-btn-submit u-button-style">댓글등록</button>
+            </div>
+            <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
+            <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
+            <input type="hidden" value="" name="recaptchaResponse">
+          </form>
+        </div>
+      </div>
+    </section> -->
+    <!-- 댓글 read -->
+    <%-- 댓글 목록 출력 영역 --%>
+	<div id="comment_list"></div>
+	
+    <!-- <section class="u-clearfix u-palette-3-light-3 u-section-4" id="sec-9954">
       <div class="u-clearfix u-sheet u-sheet-1">
         <h3 class="u-text u-text-1">작성자이름</h3>
         <p class="u-text u-text-2">2021.08.01 am 10:00</p>
@@ -132,8 +177,7 @@ occaecat cupidatat non proident, sunt in culpa qui officia deserunt
 mollit anim id est laborum. 
         </p>
       </div>
-    </section>
-    
+    </section> -->
     
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-4164"><div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
@@ -149,5 +193,203 @@ mollit anim id est laborum.
         <span>HTML Builder</span>
       </a>. 
     </section>
+    
+   <!-- Ajax -->
+   <script type="text/javascript">
+	// [문서가 실행되자마자 목록을 출력하기위해 가장먼저 호출]
+	loadComment();
+	
+	// 댓글목록을 제공하는 JSP문서를 요청하여 응답받아 출력하는 함수
+	function loadComment() {
+		$.ajax({
+			type: "GET",
+			url: "comment_list.jsp",
+			dataType: "xml",
+			success: function(xmlDoc) {
+				// 코드확인
+				var code=$(xmlDoc).find("code").text();
+				if (code=="success") { 
+					// data를 배열로 저장 >> 이때 꼮꼮 JSON객체로 변환처리해줘야함미덩 [object객체로 인식!]
+					var commentArray=JSON.parse($(xmlDoc).find("data").text());
+					
+					// 댓글 출력목록의 초기화
+					$("#comment_list").children().remove();
+					
+					// 반복지시자 이용하여 출력 >> [object객체로 인식!하니까 $넣어서 접근하는고얌]
+					$(commentArray).each(function() {
+						// 수정을 위해 각각의 div에 고유값인 id를 부여 >> 이때 num활용
+						// 삭제를 위해 num부여 >> 이때도 num활용
+						$("#comment_list").append("<section class='u-clearfix u-palette-3-light-3 u-section-4' id='sec-9954'><div id='comment_"+this.num+"' class='u-clearfix u-sheet u-sheet-1' num='"+this.num+"'><br><h3 class='u-text u-text-1'>"+this.writer+"</h3><br><p class='u-text u-text-2'>"+this.writeDate+"</p><br><p class='u-text u-text-3'>"+this.content.replace(/\n/g, "<br>")+"</p><br><button class='u-btn u-btn-submit u-button-style' id='replyDeleteBtn' type='button' onclick='removeComment("+this.num+");'>삭제</button>&nbsp;<button class='u-btn u-btn-submit u-button-style' id='replyModifyBtn' type='button' onclick='modifyComment("+this.num+");'>수정</button></div></div></section>");
+						});
+				} else { 
+					var message=$(xmlDoc).find("message").text();
+					$("#comment_list").html("<div class='no_comment'>"+message+"</div>");
+				}
+			},
+			error: function(xhr) {
+				alert("ERROR CODE : "+xhr.status);
+			}
+		});
+	}
+	
+	// [댓글등록] 클릭시 호출될 이벤트핸들러 함수 등록
+	$("#add_btn").click(function() {
+		// 입력값 유효성검사
+		var writer=$("#writer").val();
+		if(writer=="") {
+			$("#add_message").html("작성자를 입력하세용!");
+			$("#writer").focus();
+			return;
+		}
+		var content=$("#content").val();
+		if(content=="") {
+			$("#add_message").html("내용도 입력하세용!");
+			$("#content").focus();
+			return;
+		}
+		
+		// 입력태그 초기화
+		$("#writer").val("");
+		$("#content").val("");
+		$("#add_message").html("");
+		
+		// ajax기능으로 요청 및 응답처리
+		$.ajax({
+			type: "POST",
+			url: "comment_add.jsp",
+			data: "writer="+writer+"&content="+content,     // QueryString형태로 전달
+			dataType: "xml",
+			success: function(xmlDoc) {
+				var code=$(xmlDoc).find("code").text();
+				if(code=="success") {
+					loadComment();
+				}
+			},
+			error: function(xhr) {
+				alert("ERROR CODE : "+xhr.status);
+			}
+		});
+	});
+	
+	// 댓글변경 영역을 초기화하는 함수
+	function initModify() {
+		$("#modify_writer").val("");
+		$("#modify_content").val("");
+		$("#modify_message").html("&nbsp;");
+	}
+
+	// 댓글보기의 [수정] 버튼클릭시 호출되는 이벤트핸들러함수 호출
+	function modifyComment(num) {
+		initModify();
+		// 댓글 삭제영역을 숨김 및 안전한 곳으로 이동
+		$("#comment_remove").hide().appendTo(document.documentElement);
+		// 댓글 수정영역을 출력 및 해당 댓글의 자식영역으로 이동
+		// appendTo(target) : 이동할때 사용하는 메소드
+		$("#comment_modify").show().appendTo("#comment_"+num);
+		// 댓글 변경영역의 입력태그에 댓글 정보를 출력
+		// => 댓글 정보를 검색하여 제공하는 JSP문서를 요청하여 결과를 제공
+		$.ajax({
+			type: "GET",
+			url: "comment_get.jsp",
+			data: {"num":num},
+			dataType: "xml",
+			success: function(xmlDoc) {
+				var code=$(xmlDoc).find("code").text();
+				if (code=="success") {
+					var comment=JSON.parse($(xmlDoc).find("data").text());
+					$("#modify_writer").val(comment.writer);
+					$("#modify_content").val(comment.content);
+				} else {
+					// 댓글 변경영역을 RootElement영역의 자식으로 숨김처리 >> 절대 삭제되지않을 안전한 영역으로 이동
+					$("#comment_modify").hide().appendTo(document.documentElement);
+					$("#add_message").html("댓글이 존재하지 않습니다.");
+				}
+			},
+			error: function(xhr) {
+				alert("ERROR CODE : "+xhr.status);
+			}
+		});
+	}
+	
+	// 댓글수정영역의 [댓글수정] 버튼을 누른 경우 호출될 이벤트핸들러 등록
+	// => 변경값을 전달받아 댓글을 변경하는 JSP문서를 요청하여 응답결과 처리 
+	$("#modify_btn").click(function() {
+		// 댓글변경영역의 부모의 것을 가져와라 라는 뜻 : 엘리먼트의 속성 이용
+		var num=$("#comment_modify").parent().attr("num");
+		var writer=$("#modify_writer").val();
+		if(writer=="") {
+			$("#modify_message").html("변경할 작성자를 입력해 주세요.");
+			$("#modify_writer").focus();
+			return;
+		}
+		var content=$("#modify_content").val();
+		if(content=="") {
+			$("#modify_message").html("변경 댓글내용을 입력해 주세요.");
+			$("#modify_content").focus();
+			return;
+		}
+		initModify();
+		
+		// 댓글을 변경하는 JSP문서를 AJAX기능으로 요청하여 응답결과 처리
+		$.ajax({
+			type: "POST",
+			url: "comment_modify.jsp",
+			data: {"num":num, "writer":writer, "content":content},
+			dataType: "xml",
+			success: function(xmlDoc) {
+				var code=$(xmlDoc).find("code").text();
+				if(code=="success") {
+					$("#comment_modify").hide().appendTo(document.documentElement);
+					loadComment();
+				} else {
+					$("#modify_message").html("댓글을 변경하지 못했습니다.");
+				}
+			}, 
+			error: function(xhr) {
+				alert("ERROR CODE : "+xhr.status);
+			}
+		});
+		
+	});
+	
+	// 댓글수정영역의 [수정취소] 버튼을 누른 경우 호출될 이벤트핸들러 등록
+	$("#modify_cancel_btn").click(function() {
+		initModify();
+		$("#comment_modify").hide().appendTo(document.documentElement);
+	});
+	
+	// 댓글의 [삭제]버튼 클릭시 호출될 이벤트핸들러 등록
+	function removeComment(num) {
+		$("#comment_modify").hide().appendTo(document.documentElement);
+		$("#comment_remove").show().appendTo("#comment_"+num);
+	}
+	
+	// 댓글삭제영역의 [삭제취소] 버튼을 누른 경우 호출될 이벤트핸들러 등록
+	$("#remove_cancel_btn").click(function() {
+		$("#comment_remove").hide().appendTo(document.documentElement);
+	});
+	
+	// 댓글삭제영역의 [댓글삭제] 버튼을 누른 경우 호출될 이벤트핸들러 등록
+	$("#remove_btn").click(function() {
+		var num=$("#comment_remove").parent().attr("num");
+		$.ajax({
+			type: "POST",
+			url: "comment_remove.jsp",
+			data: {"num":num},
+			dataype: "xml",
+			success: function(xmlDoc) {
+				var code=$(xmlDoc).find("code").text();
+				if(code=="success") {
+					$("#comment_remove").hide().appendTo(document.documentElement);
+					loadComment();
+				}
+			},
+			error: function(xhr) {
+				alert("ERROR CODE : "+xhr.status);
+			}
+		});
+	});
+	</script>
   </body>
 </html>
+					

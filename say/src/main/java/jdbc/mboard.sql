@@ -44,7 +44,7 @@ create table ajax_comment(
 	write_date datetime not null
 )
 
-INSERT INTO ajax_comment(writer,content,write_date) VALUES("김태우","안녕하세요",now())
+INSERT INTO ajax_comment VALUES("김태우","안녕하세요",now())
 UPDATE ajax_comment set writer="김태우", content="안녕하세세세요?" where num=1;
 DELETE FROM ajax_comment where num=1;
 

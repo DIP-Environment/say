@@ -50,6 +50,6 @@ public class WriteArticleService {
 
 	private Article toArticle(WriteRequest req) throws ParseException {
 		Date now = new Date();
-		return new Article(null, req.getWirer(), req.getTitle(), now, now);
+		return new Article(null, req.getWriter(), req.getTitle(), now, now);
 	}
 }
