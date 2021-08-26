@@ -11,6 +11,10 @@ public class Article {
 	private Date regDate;
 	private Date modifiedDate;
 	
+	public Article() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Article(Integer number, Writer writer, String title, Date regDate, Date modifiedDate) throws ParseException {
 		this.number = number;
 		this.writer = writer;

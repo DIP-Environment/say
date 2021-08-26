@@ -3,7 +3,7 @@
    <listener>      
   	<listener-class>jdbc.DBCPInitListener</listener-class>
   </listener>
-   <!-- <context-param> 
+   <context-param> 
  	<param-name>poolConfig</param-name>
  	<param-value>
  		jdbcdriver=org.mariadb.jdbc.Driver
@@ -15,9 +15,9 @@
  		minIdle=4
  		maxTotal=50
  	</param-value> 
-  </context-param> -->
+  </context-param>
   <!-- 데이터베이스 연결  -->  
-  <context-param>
+  <!-- <context-param>
  	<param-name>poolConfig</param-name>
  	<param-value>
  		jdbcdriver=org.mariadb.jdbc.Driver
@@ -29,7 +29,7 @@
  		minIdle=4
  		maxTotal=50
  	</param-value>
-  </context-param>
+  </context-param> -->
   
   <!-- 로그인 체크 필터 --> 
   <filter>
